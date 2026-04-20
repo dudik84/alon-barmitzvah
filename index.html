@@ -101,21 +101,49 @@ input[type="text"]::placeholder { color: #a0b8a0; }
 }
 .submit-btn:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
 .submit-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-.success-box {
+.success-overlay {
   display: none;
-  text-align: center;
-  padding: 14px;
-  background: rgba(240,247,238,0.97);
-  border: 1px solid #2d6b3e;
-  border-radius: 4px;
-  color: #1e4d2b;
-  font-size: 16px;
-  font-weight: 700;
-  margin-top: 10px;
-  animation: fadeIn 0.4s ease;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
 }
-.success-box.show { display: block; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+.success-overlay.show {
+  display: flex;
+}
+.success-box {
+  background: white;
+  border: 3px solid #2d6b3e;
+  border-radius: 12px;
+  padding: 36px 28px;
+  text-align: center;
+  max-width: 300px;
+  width: 85%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  animation: popIn 0.4s ease;
+}
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+.success-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: #1e4d2b;
+  margin-bottom: 8px;
+}
+.success-sub {
+  font-size: 15px;
+  color: #5a8a6a;
+  font-weight: 400;
+}
+@keyframes popIn {
+  0%   { opacity:0; transform: scale(0.8); }
+  70%  { transform: scale(1.05); }
+  100% { opacity:1; transform: scale(1); }
+}
 .admin-dot { text-align: center; margin-top: 10px; font-size: 11px; color: #8aab8e; cursor: pointer; }
 .admin-dot:hover { color: #2d6b3e; }
 .admin-panel { display: none; margin-top: 10px; border-top: 1px solid #c0d8c4; padding-top: 12px; }
@@ -166,7 +194,13 @@ td { padding:7px; border-bottom:1px solid #e0ede2; }
       </div>
     </div>
     <button class="submit-btn" id="submitBtn" onclick="doSubmit()" disabled>שליחה</button>
-    <div class="success-box" id="successBox">תודה רבה! נתראה בשמחה!</div>
+    <div class="success-overlay" id="successBox">
+  <div class="success-box">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">תודה רבה!</div>
+    <div class="success-sub">נתראה בשמחה!<br>בר המצווה של אלון</div>
+  </div>
+</div>
     <div class="admin-dot" onclick="toggleAdmin()">...</div>
     <div class="admin-panel" id="adminPanel">
       <div id="pwSection">
